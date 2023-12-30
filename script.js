@@ -1,52 +1,41 @@
-let parrafo = "hO,lA!123";
-function cifrar (frace, clave){
-    let letra, resultado='';
-    let puntuacion = "',;.:!¡";
+let parrafo = "Let's eat, Grandma!";
+function cifrar (frc, clv){
 
-    let numeros = "0123456789";
-    let numerosCifrados = numeros.slice(clave);
-    numerosCifrados+= numeros.slice(0,clave);
-
-    let alfabeto = "abcdefghijklmnopqrstuvwxyz";
-    let alfabetoCifrado = alfabeto.slice(clave);
-    alfabetoCifrado += alfabeto.slice(0,clave);
+    let result='';
+    let abcL = "abcdefghijklmnopqrstuvwxyz";
+    let abcU = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     
-    for(let i =0; i<frace.length; i++){
-        letra = frace[i];
-
-        if(numeros.includes(letra)){
-            letra = numerosCifrados[numeros.indexOf(letra)];
-        }else if(puntuacion.includes(letra)){
-            letra = puntuacion[puntuacion.indexOf(letra)];
-        }else if(letra === letra.toUpperCase()){
-            letra = letra.toLowerCase();
-            letra = alfabetoCifrado[alfabeto.indexOf(letra)];
-            letra=letra.toUpperCase();
+    for(let ltr of frc){
+     
+        if(abcL.includes(ltr)){
+           result += abcL[(abcL.indexOf(ltr)+clv)%abcL.length];   
+        }else if(abcU.includes(ltr)){
+            result += abcU[(abcU.indexOf(ltr)+clv)%abcU.length];
         }else{
-            letra = alfabetoCifrado[alfabeto.indexOf(letra)];
-        }
-        resultado+=letra;
-    }
-    return resultado;
-}
-console.log(cifrar(parrafo,3));
 
-function descifrar (frace, clave){
-    let letra, resultado='';
-    let alfabeto = "abcdefghijklmnopqrstuvwxyz";
-    let alfabetoCifrado = alfabeto.slice(clave);
-    alfabetoCifrado += alfabeto.slice(0,clave);
-    
-    for(let i =0; i<frace.length; i++){
-        letra = frace[i].toLowerCase();
-        if(letra === ' '){
-            letra = ' ';
-        }else{
-            letra = alfabeto[alfabetoCifrado.indexOf(letra)];
+            result+=ltr;
         }
-        resultado+=letra;
     }
-    return resultado;
+
+    return result;
 }
+console.log(cifrar(parrafo,21));
+
+
+// function descifrar (frc, clv){
+//     let result='';
+//     let abc = "abcdefghijklmnopqrstuvwxyz";
+   
+//     for(let i =0; i<frc.length; i++){
+//         ltr = frc[i].toLowerCase();
+//         if(ltr === ' '){
+//             ltr = ' ';
+//         }else{
+//             ltr = abc[abcCifrado.indexOf(ltr)];
+//         }
+//         result+=ltr;
+//     }
+//     return result;
+// }
 // console.log(descifrar(parrafo,3));
 
